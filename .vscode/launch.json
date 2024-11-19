@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Iniciar servidor Astro",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npx astro dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Abrir en Chrome",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}",
+      "skipFiles": ["<node_internals>/**"],
+      "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "preLaunchTask": "Iniciar servidor Astro"
+    }
+  ]
+}
+

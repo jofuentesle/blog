@@ -1,0 +1,49 @@
+---
+import { getCollection, type CollectionEntry  } from "astro:content";
+import { map } from "astro:schema";
+import H1 from "../../components/H1.astro";
+import Main from "../../components/Main.astro";
+import PostsList from "../../components/PostsList.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = async () => {
+    //Creamos constante con la coleccion de post de la carpeta src/content/posts
+    const posts = await getCollection("posts");
+
+    //Creamos el path del post
+    const paths = posts.map(post => {
+        return {
+            params: {
+                slug: post.slug
+            },
+            props: {
+                post
+            }
+        }
+    })
+    //Devolvemos el path creado en base a los datos del archivo src/content/posts
+    return paths;
+}
+
+//Definimos los Props y el tipado y obtenemos los props de los post de collection
+type Props = {
+    post: CollectionEntry<"posts">
+}
+
+const {post} = Astro.props;
+const {Content} = await post.render();
+---
+
+
+<Layout title={post.data.title}>
+	
+	<!--Usamos componente -->
+	<Main>
+
+		<!--Usamos componente -->
+		<H1 text={post.data.title}/>
+        <div class="prose prose-2xl overflow-visible relative mb-20">
+            <Content />
+        </div>
+	</Main>
+</Layout>

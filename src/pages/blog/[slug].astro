@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry  } from "astro:content";
 import { map } from "astro:schema";
+import { Image } from "astro:assets";
 import H1 from "../../components/H1.astro";
 import Main from "../../components/Main.astro";
 import PostsList from "../../components/PostsList.astro";
@@ -42,6 +43,16 @@ const {Content} = await post.render();
 
 		<!--Usamos componente -->
 		<H1 text={post.data.title}/>
+
+        <!-- Cargamos componete Image de astre:assets-->
+        <Image
+            src={post.data.image}
+            alt={post.data.title || "Imagen del post"}
+            width={1024}
+            height={1024 / 1.5}
+            class="rounded-2xl shadow-xl mb-6 aspect-thumbnail object-cover"
+        />
+
         <div class="prose prose-2xl overflow-visible relative mb-20">
             <Content />
         </div>
